@@ -15,4 +15,8 @@ module.exports = function (app) {
         var obj = {};
         res.render("userprofile", obj);
     });
+    app.get("*", function (req, res) {
+        var obj = {};
+        res.render("about", obj);
+    });
 }
