@@ -114,26 +114,24 @@ function returnVenueLocations(venueList) {
     return newList;
 }
 
-function foursquareController() {
-    Promise.all([getFromFourSquare(coffeShopId), getFromFourSquare(foodId), getFromFourSquare(barId), getFromFourSquare(breweryId)]).then(function (values) {
-        // console.log(values);
-    
-        var coffeeResponse = values[0].response.venues;
-        var foodResponse = values[1].response.venues;
-        var barResponse = values[2].response.venues;
-        var breweryResponse = values[3].response.venues;
-    
-        var coffeeShops = returnVenueLocations(coffeeResponse);
-        var foodShops = returnVenueLocations(foodResponse);
-        var barShops = returnVenueLocations(barResponse);
-        var breweryShops = returnVenueLocations(breweryResponse);
-    
-        console.log(coffeeShops);
-        console.log(foodShops);
-        console.log(barShops);
-        console.log(breweryShops);
-    })
-}
+Promise.all([getFromFourSquare(coffeShopId), getFromFourSquare(foodId), getFromFourSquare(barId), getFromFourSquare(breweryId)]).then(function (values) {
+    // console.log(values);
+
+    var coffeeResponse = values[0].response.venues;
+    var foodResponse = values[1].response.venues;
+    var barResponse = values[2].response.venues;
+    var breweryResponse = values[3].response.venues;
+
+    var coffeeShops = returnVenueLocations(coffeeResponse);
+    var foodShops = returnVenueLocations(foodResponse);
+    var barShops = returnVenueLocations(barResponse);
+    var breweryShops = returnVenueLocations(breweryResponse);
+
+    console.log(coffeeShops);
+    console.log(foodShops);
+    console.log(barShops);
+    console.log(breweryShops);
+})
 
 //==========================================================================//
 // progress bar //
@@ -241,7 +239,7 @@ function newUser() {
 // Logic - Functionality //
 
 // On Submit for Creating a New Recommendation
-$("#create-form").on("submit", function(event) {
+$("#create-form").on("submit", function (event) {
     event.preventDefault();
 
     var newRecommendation = {
@@ -253,7 +251,7 @@ $("#create-form").on("submit", function(event) {
     $.ajax("/challenges/insert", {
         type: "POST",
         data: newRecommendation
-    }).then(function() {
+    }).then(function () {
         console.log("Created New Recommendation!")
         location.reload();
     });
